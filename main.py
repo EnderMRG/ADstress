@@ -381,8 +381,17 @@ def download_ranked_data():
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-app.mount("/static", StaticFiles(directory="."), name="static")
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+frontend_dir = backend_dir / "frontend"
+
+app.mount(
+    "/static",
+    StaticFiles(directory=str(frontend_dir)),
+    name="static"
+)
 
 @app.get("/")
 def serve_frontend():
-    return FileResponse("index.html")
+    return FileResponse(frontend_dir / "index.html")
