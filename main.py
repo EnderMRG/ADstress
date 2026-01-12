@@ -381,10 +381,12 @@ def download_ranked_data():
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-
+# Serve static assets from root
 app.mount("/static", StaticFiles(directory="."), name="static")
+
+@app.get("/")
+def serve_frontend():
+    return FileResponse("index.html")
 
 @app.get("/health")
 def health():
