@@ -39,6 +39,7 @@
       transform: scale(1.05); /* prevents blur edges */
       opacity: 0.25;          /* soft, professional */
       z-index: -1;
+      pointer-events: none;
     }
 
     body {
@@ -381,7 +382,7 @@
   </div>
 
 <script>
-const API_URL = "";
+const API_URL = "https://aadhaar-service-dashboard.onrender.com";
 let currentState = "", currentDistrict = "", currentDate = "";
 let trendChart = null, topChart = null;
 
