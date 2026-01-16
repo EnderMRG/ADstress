@@ -823,15 +823,13 @@ def download_ranked_data():
         print("CSV GENERATION ERROR:", e)
         raise HTTPException(status_code=500, detail=str(e))
     
-BASE_DIR = Path(__file__).resolve().parent          # backend/
-FRONTEND_DIR = BASE_DIR.parent / "frontend"         # frontend/
+# Serve static assets from root
+app.mount("/static", StaticFiles(directory="."), name="static")
 
-# serve frontend folder files under /static
-app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
-
-@app.get("/", include_in_schema=False)
+@app.get("/")
 def serve_frontend():
-    return FileResponse(str(FRONTEND_DIR / "index.html"))
+    return FileResponse("index.html")
+
 
 @app.get("/health")
 def health():
